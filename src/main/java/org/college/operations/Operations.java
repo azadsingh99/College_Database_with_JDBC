@@ -73,6 +73,8 @@ public class Operations {
 
                             query = "UPDATE sy_student set marks = " + marks +" where roll_no = " + roll_no;
                             System.out.println(query);
+
+                            result = jdbc.executeUpdate(query);
                             System.out.println("ROLL NO " + roll_no + " MARKS UPDATED");
                             break;
 
