@@ -2,6 +2,7 @@ package org.college.operations;
 
 import org.Collge.connection.JDBCconnect;
 
+import java.sql.ResultSet;
 import java.util.Scanner;
 
 public class Operations {
@@ -21,6 +22,7 @@ public class Operations {
             System.out.println("--------COLLEGE DATABASE---------");
             System.out.println("1. SYBSC");
             System.out.println("2. TYBSC");
+            System.out.println("3. EXIT");
             System.out.print("Choose Option : ");
             option = sc.nextInt();
 
@@ -30,6 +32,7 @@ public class Operations {
                     System.out.println("2. REMOVE STUDENT DATA");
                     System.out.println("3. UPDATE MARKS");
                     System.out.println("4. DISPLAY STUDENT DATA");
+                    System.out.println("5. EXIT");
 
                     System.out.print("Choose Option : ");
                     option = sc.nextInt();
@@ -61,6 +64,35 @@ public class Operations {
                             System.out.println(result + " DATA DELETED");
                             break;
 
+                        case 3:
+                            System.out.print("Enter Student's Roll_no : ");
+                            roll_no = sc.nextInt();
+
+                            System.out.print("Enter Updated Marks : ");
+                            marks = sc.nextFloat();
+
+                            query = "UPDATE sy_student set marks = " + marks +" where roll_no = " + roll_no;
+                            System.out.println(query);
+                            System.out.println("ROLL NO " + roll_no + " MARKS UPDATED");
+                            break;
+
+                        case 4:
+                            System.out.print("Enter Student's Roll No : ");
+                            roll_no = sc.nextInt();
+
+                            query = "select * from sy_student where roll_no = " + roll_no;
+                            System.out.println(query);
+                            ResultSet resultSet = jdbc.executeQuery(query);
+
+                            while(resultSet.next()){
+                                System.out.println(resultSet.getString("roll_no"));
+                                System.out.println(resultSet.getString("name"));
+                                System.out.println(resultSet.getString("marks"));
+                            }
+                            break;
+                        case 5:
+                            System.out.println("THANKS!!!!!!");
+                            System.exit(0);
                     }
             }
 
